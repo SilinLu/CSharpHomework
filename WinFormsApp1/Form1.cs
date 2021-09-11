@@ -26,12 +26,12 @@ namespace WinFormsApp1
                 double c=a+b ;
                 label1.Text = a.ToString();
             }
-            else if (radioButton2.Checked)
+            else if (subButton.Checked)
             {
                 double c = a-b;
                 label1.Text = a.ToString();
             }
-            else if (radioButton3.Checked)
+            else if (multiplyButton.Checked)
             {
                 double c = a*b;
                 label1.Text = a.ToString();

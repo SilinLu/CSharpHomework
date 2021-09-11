@@ -34,9 +34,9 @@ namespace WinFormsApp1
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.addButton = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.subButton = new System.Windows.Forms.RadioButton();
+            this.multiplyButton = new System.Windows.Forms.RadioButton();
+            this.divideButton = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -85,42 +85,42 @@ namespace WinFormsApp1
             this.addButton.Text = "+";
             this.addButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // subButton
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(3, 33);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(36, 24);
-            this.radioButton2.TabIndex = 6;
-            this.radioButton2.Text = "-";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.subButton.AutoSize = true;
+            this.subButton.Location = new System.Drawing.Point(3, 33);
+            this.subButton.Name = "subButton";
+            this.subButton.Size = new System.Drawing.Size(36, 24);
+            this.subButton.TabIndex = 6;
+            this.subButton.Text = "-";
+            this.subButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // multiplyButton
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(3, 63);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(37, 24);
-            this.radioButton3.TabIndex = 7;
-            this.radioButton3.Text = "*";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.multiplyButton.AutoSize = true;
+            this.multiplyButton.Location = new System.Drawing.Point(3, 63);
+            this.multiplyButton.Name = "multiplyButton";
+            this.multiplyButton.Size = new System.Drawing.Size(37, 24);
+            this.multiplyButton.TabIndex = 7;
+            this.multiplyButton.Text = "*";
+            this.multiplyButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // divideButton
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(3, 93);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(36, 24);
-            this.radioButton4.TabIndex = 8;
-            this.radioButton4.Text = "/";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.divideButton.AutoSize = true;
+            this.divideButton.Location = new System.Drawing.Point(3, 93);
+            this.divideButton.Name = "divideButton";
+            this.divideButton.Size = new System.Drawing.Size(36, 24);
+            this.divideButton.TabIndex = 8;
+            this.divideButton.Text = "/";
+            this.divideButton.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.addButton);
-            this.panel1.Controls.Add(this.radioButton4);
-            this.panel1.Controls.Add(this.radioButton2);
-            this.panel1.Controls.Add(this.radioButton3);
+            this.panel1.Controls.Add(this.divideButton);
+            this.panel1.Controls.Add(this.subButton);
+            this.panel1.Controls.Add(this.multiplyButton);
             this.panel1.Location = new System.Drawing.Point(55, 75);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(125, 126);
@@ -153,9 +153,9 @@ namespace WinFormsApp1
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton addButton;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton subButton;
+        private System.Windows.Forms.RadioButton multiplyButton;
+        private System.Windows.Forms.RadioButton divideButton;
         private System.Windows.Forms.Panel panel1;
     }
 }
