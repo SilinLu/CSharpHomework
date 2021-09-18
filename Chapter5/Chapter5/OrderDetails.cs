@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Chapter5
 {
+
+
+   
     class OrderDetails
     {
         public Goods good { get; set; }
@@ -18,7 +21,7 @@ namespace Chapter5
         public override bool Equals(object obj)
         {
             OrderDetails details = obj as OrderDetails;
-            return details != null && good == details.good;
+            return details != null && good.Name==details.good.Name;
         }
 
         public override int GetHashCode()

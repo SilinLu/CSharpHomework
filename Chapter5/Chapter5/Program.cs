@@ -4,15 +4,47 @@ namespace Chapter5
 {
     class Program
     {
-        
+        static OrderService service = new OrderService();
+
+        static void AddDetail(Order order)
+        {
+            Console.WriteLine("请您选择货物:");
+            for (int i = 0; i < service.goods.Count; i++)
+            {
+                Console.WriteLine($"{i}:{service.goods[i].ToString()}");
+            }
+            int num = int.Parse(Console.ReadLine());
+            Console.WriteLine("请您输入购买的数量:");
+            int quantity = int.Parse(Console.ReadLine());
+            try
+            {
+                
+                service.AddOrderDetails(order, quantity, num);
+            }
+            catch (MyExpection e)
+            {
+                Console.WriteLine("添加商品失败，错误代码：" + e.Code);
+            }
+        }
         static void Add()
         {
-
+            string end = "";
+            Order order = new Order();
+            while (end != "E")
+            {
+                AddDetail(order);
+                Console.WriteLine("按回车继续 ，按E+回车结束---");
+                end = Console.ReadLine();
+            }
+            Console.WriteLine("请输入您的用户名:");
+            Customer c = new Customer();
+            c.Name = Console.ReadLine();
+            service.AddOrder(order, c);
         }
         static void Main(string[] args)
         {
             string index;
-            OrderService service = new OrderService();
+
             
             while (true)
             {
@@ -21,32 +53,10 @@ namespace Chapter5
                 switch (index)
                 {
                     case "A":
-                        string end = "";
-                        Order order = new Order();
-                        while (end != "E")
-                        {
-                            Console.WriteLine("请您选择货物:");
-                            for (int i = 0; i < service.goods.Count; i++)
-                            {
-                                Console.WriteLine($"{i}:{service.goods[i].ToString()}");
-                            }
-                            int num = int.Parse(Console.ReadLine());
-                            Console.WriteLine("请您输入购买的数量:");
-                            int quantity = int.Parse(Console.ReadLine());
-                            service.AddOrderDetails(order, quantity, num);
-                            Console.WriteLine("按回车继续 ，按E+回车结束---");
-                            end = Console.ReadLine();
-                        }
-                        Console.WriteLine("请输入您的用户名:");
-                        Customer c = new Customer();
-
-                        c.Name = Console.ReadLine();
-                        service.AddOrder(order, c);
-
+                        Add();
                         break;
                     case "D":
                         Console.WriteLine("请您输入订单号:");
-
                         break;
                     case "C": break;
                     case "S": break;

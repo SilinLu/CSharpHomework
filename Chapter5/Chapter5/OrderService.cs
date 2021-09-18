@@ -5,6 +5,17 @@ using System.Text;
 
 namespace Chapter5
 {
+
+    class MyExpection : Exception
+    {
+        private int code;
+        public MyExpection(string message,int code) : base(message)
+        {
+            this.code = code;
+        }
+        public int Code { get => code; }
+    }
+
     class OrderService
     {
         public List<Order> orders;
@@ -23,11 +34,15 @@ namespace Chapter5
             details.Sum_Cost = quantity * details.good.Unit_Price;
             if (order.OrderDetails != null)
             {
-                var query = from d in order.OrderDetails
-                            where d.Equals(details)
-                            select d;
-                if (query != null)
-                    return;    
+                var query = from o in order.OrderDetails
+                            where o.Equals(details)
+                            select o;
+
+                if (query.Count()!=0)
+                {
+                    throw new MyExpection("物品重复", 0);
+                }
+                       
             }
             else
                 order.OrderDetails = new List<OrderDetails>();
@@ -55,8 +70,17 @@ namespace Chapter5
             if (query == null)
                 orders.Add(order);
         }
-        public void DeleteOrder() 
+        public void DeleteOrder(uint num) 
         {
+            if (orders != null)
+            {
+                var query = from o in orders
+                            where o.Order_Num == num
+                            select o;
+                orders.Remove(query as Order);
+            }
+
+            throw new MyExpection("订单号不存在，删除失败",1);
 
         }
     }
