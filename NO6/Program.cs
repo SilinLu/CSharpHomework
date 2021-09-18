@@ -35,9 +35,7 @@ namespace NO6
 
         public override bool IsShape()
         {
-            if (height > 0 && width > 0)
-                return true;
-            return false;
+            return height > 0 && width > 0;
         }
 
         public override double PrintArea()
@@ -60,9 +58,7 @@ namespace NO6
         }
         public override bool IsShape()
         {
-            if (side> 0)
-                return true;
-            return false;
+            return side>0;
         }
 
         public override double PrintArea()
@@ -87,9 +83,7 @@ namespace NO6
         }
         public override bool IsShape()
         {
-            if (sideA+sideB > sideC&& sideC + sideB > sideA&& sideA + sideC > sideB)
-                return true;
-            return false;
+            return sideA > 0 && sideB > 0 && sideC > 0 && sideA + sideB > sideC && sideC + sideB > sideA && sideA + sideC > sideB;
         }
 
         public override double PrintArea()
@@ -112,9 +106,7 @@ namespace NO6
         }
         public override bool IsShape()
         {
-            if (radius > 0)
-                return true;
-            return false;
+            return radius > 0;
         }
 
         public override double PrintArea()
@@ -128,33 +120,26 @@ namespace NO6
     }
     class ShapeFactory
     {
-        public static Shape GetShape(int index)
+        public static Shape GetShape(int index,double a,double b,double c)
         {
             Shape shape = null;
             switch (index)
             {
                 case 0:
-                    Console.WriteLine("请分别输入三角形三条边：");
-                    double a = double.Parse(Console.ReadLine());
-                    double b = double.Parse(Console.ReadLine());
-                    double c = double.Parse(Console.ReadLine());
+
                     shape = new Triangle(a,b,c);
                     break;
                 case 1:
-                    Console.WriteLine("请输入正方形的边：");
-                    double side = double.Parse(Console.ReadLine());
-                    shape = new Square(side);
+                    
+                    shape = new Square(a);
                     break;
                 case 2:
-                    Console.WriteLine("请输入圆形半径：");
-                    double radius = double.Parse(Console.ReadLine());
-                    shape = new Circle(radius);
+                   
+                    shape = new Circle(a);
                     break;
                 case 3:
-                    Console.WriteLine("请分别输入长方形的长和宽：");
-                    double height = double.Parse(Console.ReadLine());
-                    double width = double.Parse(Console.ReadLine());
-                    shape = new Rectangle(height,width);
+
+                    shape = new Rectangle(a,b);
                     break;
                 default:break;
             }
@@ -174,7 +159,14 @@ namespace NO6
                 Console.WriteLine($"第{i+1}个图形");
                 Random random = new Random();
                 int n = random.Next(0, 4);
-                Shape shape= ShapeFactory.GetShape(n);
+                Random random_A = new Random();
+                int a = random.Next(0, 10);
+                Random random_B = new Random();
+                int b = random.Next(0, 10);
+                Random random_C = new Random();
+                int c = random.Next(0, 10);
+                Console.WriteLine($"a:{a},b:{b},c:{c}");
+                Shape shape= ShapeFactory.GetShape(n,a,b,c);
                 if (shape != null && shape.IsShape())
                     totalArea += shape.PrintArea();
                 else {
