@@ -58,6 +58,7 @@ namespace Chapter5
             order.Order_Num = Order.ORDER_NUM++;
             if (orders == null)
             {
+                orders = new List<Order>();
                 orders.Add(order);
                 return;
             }
@@ -67,21 +68,59 @@ namespace Chapter5
                         select o
                         ;
 
-            if (query == null)
+            if (query.Count()==0)
                 orders.Add(order);
         }
         public void DeleteOrder(uint num) 
         {
-            if (orders != null)
-            {
-                var query = from o in orders
-                            where o.Order_Num == num
-                            select o;
-                orders.Remove(query as Order);
-            }
-
-            throw new MyExpection("订单号不存在，删除失败",1);
+            if(orders==null)
+                throw new MyExpection("订单号不存在", 1);
+            
+            var query = from o in orders
+                        where o.Order_Num == num
+                        select o;
+            if (query.Count() == 0)
+                throw new MyExpection("订单号不存在", 1);
+            var a = query.First();
+            orders.Remove(query.First());
 
         }
+
+        public void ExchangeCustomer(Order o,string name)
+        {
+            o.Customer.Name = name;
+        }
+        public void ExchangeAddDetail(Order o, OrderDetails details)
+        {
+            var query = from d in o.OrderDetails
+                        where d.Equals(details)
+                        select d;
+            if (query.Count() != 0)
+                throw new MyExpection("物品重复", 0);
+            o.OrderDetails.Add(details);
+
+        }
+        public void ExchangeDeleteDetail(Order o, OrderDetails details)
+        {
+            var query = from d in o.OrderDetails
+                        where d.Equals(details)
+                        select d;
+            if (query.Count() == 0)
+                throw new MyExpection("物品不存在", 2);
+            o.OrderDetails.Remove(details);
+        }
+        public void ExchangeNumOfGoods(Order o, OrderDetails details,int num)
+        {
+            var query = from d in o.OrderDetails
+                        where d.Equals(details)
+                        select d;
+            if (query.Count() == 0)
+                throw new MyExpection("物品不存在", 2);
+            query.First().Goods_Num = num;
+
+        }
+        
     }
+
+
 }

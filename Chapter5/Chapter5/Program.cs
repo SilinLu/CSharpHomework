@@ -23,7 +23,7 @@ namespace Chapter5
             }
             catch (MyExpection e)
             {
-                Console.WriteLine("添加商品失败，错误代码：" + e.Code);
+                Console.WriteLine($"添加商品失败，错误代码：{e.Code}");
             }
         }
         static void Add()
@@ -40,6 +40,22 @@ namespace Chapter5
             Customer c = new Customer();
             c.Name = Console.ReadLine();
             service.AddOrder(order, c);
+            Console.WriteLine($"下订单成功，订单号为{order.Order_Num}");
+        }
+
+        static void Delete()
+        {
+            Console.WriteLine("请您输入订单号:");
+            uint num = uint.Parse(Console.ReadLine());
+            try {
+                service.DeleteOrder(num);
+            }
+            catch(MyExpection e)
+            {
+                Console.WriteLine($"删除订单失败，错误代码：{e.Code}");
+            }
+
+            
         }
         static void Main(string[] args)
         {
@@ -56,7 +72,7 @@ namespace Chapter5
                         Add();
                         break;
                     case "D":
-                        Console.WriteLine("请您输入订单号:");
+                        Delete();
                         break;
                     case "C": break;
                     case "S": break;
