@@ -26,8 +26,9 @@ namespace Chapter5
             new Goods("watermelon", 2),
             new Goods("orange", 2.5)
         };
-        public void AddOrderDetails(Order order,int quantity,int goods_Index)
+        public void AddOrderDetails(Order order,int quantity,int goods_Index)//添加订单明细
         {
+
             OrderDetails details = new OrderDetails();
             details.good = goods[goods_Index];
             details.Goods_Num = quantity;
@@ -46,16 +47,17 @@ namespace Chapter5
             }
             else
                 order.OrderDetails = new List<OrderDetails>();
-
+            order.SumPrice += details.Sum_Cost;
             order.OrderDetails.Add(details);
 
 
         }
-        public void AddOrder(Order order,Customer customer)
+        public void AddOrder(Order order,Customer customer)//添加订单
         {
 
             order.Customer = customer;
             order.Order_Num = Order.ORDER_NUM++;
+            
             if (orders == null)
             {
                 orders = new List<Order>();
@@ -71,55 +73,101 @@ namespace Chapter5
             if (query.Count()==0)
                 orders.Add(order);
         }
-        public void DeleteOrder(uint num) 
+        public void DeleteOrder(uint num) //删除订单
         {
-            if(orders==null)
-                throw new MyExpection("订单号不存在", 1);
+            var order = this.SearchByNum(num);
+
+            orders.Remove(order);
+
+        }
+
+        //public void ChangeCustomer(Order order, string name)//修改订单用户
+        //{
+
+        //    if(order==null)
+        //        throw new MyExpection("订单号不存在", 1);
+        //    order.Customer.Name = name;
+        //}
+
+        //public void ChangeAddDetail(Order o, OrderDetails details)          //直接用上面的AddDetail
+        //{
+        //    var query = from d in o.OrderDetails
+        //                where d.Equals(details)
+        //                select d;
+        //    if (query.Count() != 0)
+        //        throw new MyExpection("物品重复", 0);
+        //    o.OrderDetails.Add(details);
+
+        //}
+        public void ChangeDeleteDetail(Order order, int goodIndex)//删除某个订单明细
+        {
             
-            var query = from o in orders
-                        where o.Order_Num == num
-                        select o;
-            if (query.Count() == 0)
-                throw new MyExpection("订单号不存在", 1);
-            var a = query.First();
-            orders.Remove(query.First());
 
-        }
-
-        public void ExchangeCustomer(Order o,string name)
-        {
-            o.Customer.Name = name;
-        }
-        public void ExchangeAddDetail(Order o, OrderDetails details)
-        {
-            var query = from d in o.OrderDetails
-                        where d.Equals(details)
+            var query = from d in order.OrderDetails
+                        where d.good.Equals(goods[goodIndex])
                         select d;
-            if (query.Count() != 0)
-                throw new MyExpection("物品重复", 0);
-            o.OrderDetails.Add(details);
+            order.OrderDetails.Remove(query.First());
+        }
+        public void ChangeNumOfGoods(Order o, int goodIndex,int num)//修改订单明细中的货物数量
+        {
 
-        }
-        public void ExchangeDeleteDetail(Order o, OrderDetails details)
-        {
             var query = from d in o.OrderDetails
-                        where d.Equals(details)
-                        select d;
-            if (query.Count() == 0)
-                throw new MyExpection("物品不存在", 2);
-            o.OrderDetails.Remove(details);
-        }
-        public void ExchangeNumOfGoods(Order o, OrderDetails details,int num)
-        {
-            var query = from d in o.OrderDetails
-                        where d.Equals(details)
+                        where d.good.Equals(goods[goodIndex])
                         select d;
             if (query.Count() == 0)
                 throw new MyExpection("物品不存在", 2);
             query.First().Goods_Num = num;
 
         }
-        
+        //-------------------------------------------------------------------
+        public Order SearchByNum(uint num)
+        {
+            if (orders == null)
+                throw new MyExpection("List为空", 3);
+            var query = from o in orders
+                        where o.Order_Num == num
+                        orderby o.SumPrice
+                        select o;
+            if (query.FirstOrDefault() == null)
+                throw new MyExpection("订单号不存在", 1);
+            return query.FirstOrDefault();
+        }
+        public List<Order> SearchByCost(double price)
+        {
+            if (orders == null)
+                throw new MyExpection("List为空", 3);
+            var query = from o in orders
+                        where o.SumPrice == price
+                        orderby o.SumPrice
+                        select o;
+            return query.ToList<Order>();
+        }
+        public List<Order> SearchByCostomer(string name)
+        {
+            if (orders == null)
+                throw new MyExpection("List为空", 3);
+            var query = from o in orders
+                        where o.Customer.Name == name
+                        orderby o.SumPrice
+                        select o;
+            return query.ToList<Order>();
+        }
+        public List<Order> SearchByGoodsName(string name)
+        {
+            if (orders == null)
+                throw new MyExpection("List为空", 3);
+            //foreach (Order o in orders)
+            //{
+            //    var query = from d in o.OrderDetails
+            //                where d.good.Name == name
+            //                select d;
+            //    if(query.Count()!=0)
+
+            //}
+            var query = orders.Where( s=>s.OrderDetails.Where(a => a.good.Name == name).Count()!=0);
+            return query.ToList<Order>();
+        }
+
     }
 
 
