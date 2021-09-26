@@ -205,8 +205,8 @@ namespace Chapter5
         static void Main(string[] args)
         {
             string index;
+            service.Import();
 
-            
             while (true)
             {
                 PrintOrder();
@@ -216,12 +216,15 @@ namespace Chapter5
                 {
                     case "A":
                         Add();
+                        service.Export();
                         break;
                     case "D":
                         Delete();
+                        service.Export();
                         break;
                     case "C":
                         Change();
+                        service.Export();
                         break;
                     case "S":
                         Search();

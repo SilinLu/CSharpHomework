@@ -6,8 +6,8 @@ namespace Chapter5
 {
 
 
-   
-    class OrderDetails
+    [Serializable]
+    public class OrderDetails
     {
         public Goods good { get; set; }
         public int Goods_Num { get; set; }

@@ -4,10 +4,11 @@ using System.Text;
 
 namespace Chapter5
 {
-    class Order
+    [Serializable]
+    public class Order
     {
         public uint Order_Num { get; set; }
-        public static uint ORDER_NUM=0;
+        //public static uint ORDER_NUM=0;
         public List<OrderDetails> OrderDetails;
         public double SumPrice=0;
         public Customer Customer { get; set; }

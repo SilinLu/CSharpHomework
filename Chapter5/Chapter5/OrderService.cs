@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
+using System.Xml.Serialization;
 
 namespace Chapter5
 {
@@ -56,8 +57,12 @@ namespace Chapter5
         {
 
             order.Customer = customer;
-            order.Order_Num = Order.ORDER_NUM++;
-            
+            if (orders.Count() != 0)
+                order.Order_Num = orders.Last().Order_Num++;
+            else
+                order.Order_Num = 0;
+
+
             if (orders == null)
             {
                 orders = new List<Order>();
@@ -168,6 +173,36 @@ namespace Chapter5
             return query.ToList<Order>();
         }
 
+
+        public void Export() {
+
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Order>));
+            using(FileStream fileStream=new FileStream("Order.xml", FileMode.Create))
+            {
+                xmlSerializer.Serialize(fileStream, orders);
+            }
+
+        }
+        public void Import() {
+            
+            try
+            {
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Order>));
+                using (FileStream fileStream = new FileStream("Order.xml", FileMode.Open))
+                {
+
+                    List<Order> list = (List<Order>)xmlSerializer.Deserialize(fileStream);
+
+                    orders = list;
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+
+        }
     }
 
 

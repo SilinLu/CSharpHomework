@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Chapter5
 {
-    class Goods
+    [Serializable]
+    public class Goods
     {
         public string Name { get; set; }
         public double Unit_Price { get; set; }
@@ -13,6 +14,7 @@ namespace Chapter5
             Name = name;
             Unit_Price = price;
         }
+        public Goods() { }
         public override string ToString()
         {
             return $"Goods:{Name},Unit price:{Unit_Price}";

@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Chapter5
 {
-    class Customer
+    [Serializable]
+    public class Customer
     {
         public string Name { get; set; }
         
