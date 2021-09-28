@@ -7,10 +7,10 @@ using System.Xml.Serialization;
 namespace Chapter5
 {
 
-    public class MyExpection : Exception
+    public class MyException : Exception
     {
         private int code;
-        public MyExpection(string message,int code) : base(message)
+        public MyException(string message,int code) : base(message)
         {
             this.code = code;
         }
@@ -30,7 +30,7 @@ namespace Chapter5
         public bool AddOrderDetails(Order order,int quantity,int goods_Index)//添加订单明细
         {
             if (quantity <= 0 || goods_Index < 0 || goods_Index > 4)
-                throw new MyExpection("参数错误", 4);
+                throw new MyException("参数错误", 4);
             OrderDetails details = new OrderDetails();
             details.good = goods[goods_Index];
             details.Goods_Num = quantity;
@@ -42,7 +42,7 @@ namespace Chapter5
                             select o;
 
                 if (query.Count()!=0)
-                    throw new MyExpection("物品重复", 0);
+                    throw new MyException("物品重复", 0);
                 
                        
             }
@@ -55,8 +55,8 @@ namespace Chapter5
         }
         public bool AddOrder(Order order,Customer customer)//添加订单
         {
-            if (customer == null)
-                throw new MyExpection("参数错误", 4);
+            if (customer == null||order==null)
+                throw new MyException("参数错误", 4);
             order.Customer = customer;
             if (orders.Count() != 0)
                 order.Order_Num = orders.Last().Order_Num++;
@@ -95,7 +95,7 @@ namespace Chapter5
         //{
 
         //    if(order==null)
-        //        throw new MyExpection("订单号不存在", 1);
+        //        throw new MyException("订单号不存在", 1);
         //    order.Customer.Name = name;
         //}
 
@@ -105,7 +105,7 @@ namespace Chapter5
         //                where d.Equals(details)
         //                select d;
         //    if (query.Count() != 0)
-        //        throw new MyExpection("物品重复", 0);
+        //        throw new MyException("物品重复", 0);
         //    o.OrderDetails.Add(details);
 
         //}
@@ -113,7 +113,7 @@ namespace Chapter5
         {
 
             if (goodIndex>4||goodIndex<0||order==null)
-                throw new MyExpection("参数错误", 4);
+                throw new MyException("参数错误", 4);
             var query = from d in order.OrderDetails
                         where d.good.Equals(goods[goodIndex])
                         select d;
@@ -124,13 +124,13 @@ namespace Chapter5
         {
 
             if (goodIndex > 4 || goodIndex < 0 || o == null||num<=0)
-                throw new MyExpection("参数错误", 4);
+                throw new MyException("参数错误", 4);
 
             var query = from d in o.OrderDetails
                         where d.good.Equals(goods[goodIndex])
                         select d;
             if (query.Count() == 0)
-                throw new MyExpection("物品不存在", 2);
+                throw new MyException("物品不存在", 2);
             query.First().Goods_Num = num;
             return true;
         }
@@ -138,19 +138,19 @@ namespace Chapter5
         public Order SearchByNum(uint num)
         {
             if (orders == null)
-                throw new MyExpection("List为空", 3);
+                throw new MyException("List为空", 3);
             var query = from o in orders
                         where o.Order_Num == num
                         orderby o.SumPrice
                         select o;
             if (query.FirstOrDefault() == null)
-                throw new MyExpection("订单号不存在", 1);
+                throw new MyException("订单号不存在", 1);
             return query.FirstOrDefault();
         }
         public List<Order> SearchByCost(double price)
         {
             if (orders == null)
-                throw new MyExpection("List为空", 3);
+                throw new MyException("List为空", 3);
             var query = from o in orders
                         where o.SumPrice == price
                         orderby o.SumPrice
@@ -160,7 +160,7 @@ namespace Chapter5
         public List<Order> SearchByCostomer(string name)
         {
             if (orders == null)
-                throw new MyExpection("List为空", 3);
+                throw new MyException("List为空", 3);
             var query = from o in orders
                         where o.Customer.Name == name
                         orderby o.SumPrice
@@ -170,7 +170,7 @@ namespace Chapter5
         public List<Order> SearchByGoodsName(string name)
         {
             if (orders == null)
-                throw new MyExpection("List为空", 3);
+                throw new MyException("List为空", 3);
             //foreach (Order o in orders)
             //{
             //    var query = from d in o.OrderDetails

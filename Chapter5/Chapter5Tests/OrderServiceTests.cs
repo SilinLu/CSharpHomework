@@ -19,19 +19,22 @@ namespace Chapter5.Tests
             Assert.IsTrue(service.AddOrderDetails(order, 1, 2));
         }
         [TestMethod()]
+        [ExpectedException(typeof(MyException), "Test Exception")]
         public void AddOrderDetailsTest2()
         {
             Order order = new Order();
-           
-            Assert.IsFalse(service.AddOrderDetails(order, -1, 2)) ;
-            
+
+            service.AddOrderDetails(order, -1, 2);
+
+
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(MyException), "Test Exception")]
         public void AddOrderDetailsTest3()
         {
             Order order = new Order();
-            Assert.IsFalse(service.AddOrderDetails(order, 1, 6));
+            service.AddOrderDetails(order, 1, 6);
 
         }
 
@@ -46,39 +49,42 @@ namespace Chapter5.Tests
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(MyException), "Test Exception")]
         public void AddOrderTest2()
         {
             Order order = new Order();
             Customer c=null;
-            
-            Assert.IsFalse(service.AddOrder(order, c));
+
+            service.AddOrder(order, c);
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(MyException), "Test Exception")]
         public void AddOrderTest3()
         {
             Order order =null;
             Customer c = new Customer();
-            Assert.IsFalse(service.AddOrder(order, c));
+            service.AddOrder(order, c);
         }
         [TestMethod()]
+        [ExpectedException(typeof(MyException), "Test Exception")]
         public void DeleteOrderTest1()
         {
             int count = service.orders.Count();
 
             service.DeleteOrder(100);//不存在的订单号
-            Assert.AreNotEqual(count - 1, service.orders.Count());
         }
 
         [TestMethod()]
         public void DeleteOrderTest2()
         {
-            int count = service.orders.Count();
+            
 
 
             Order order = new Order();
             order.Order_Num = 0;
             service.orders.Add(order);
+            int count = service.orders.Count();
             service.DeleteOrder(0);
             Assert.AreEqual(count - 1, service.orders.Count());
         }
@@ -102,6 +108,7 @@ namespace Chapter5.Tests
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(MyException), "Test Exception")]
         public void ChangeDeleteDetailTest2()
         {
             Order o = new Order();
@@ -116,7 +123,7 @@ namespace Chapter5.Tests
 
             o.OrderDetails.Add(Details);
             service.ChangeDeleteDetail(o, 5);
-            Assert.AreEqual(1, o.OrderDetails.Count());
+            
         }
 
         [TestMethod()]

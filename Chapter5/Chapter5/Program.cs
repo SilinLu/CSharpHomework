@@ -39,7 +39,7 @@ namespace Chapter5
                 
                 service.AddOrderDetails(order, quantity, num);
             }
-            catch (MyExpection e)
+            catch (MyException e)
             {
                 Console.WriteLine($"添加商品失败，错误代码：{e.Code}");
             }
@@ -61,7 +61,7 @@ namespace Chapter5
                 service.AddOrder(order, c);
                 Console.WriteLine($"下订单成功，订单号为{order.Order_Num}");
             }
-            catch (MyExpection e)
+            catch (MyException e)
             {
                 Console.WriteLine($"添加订单失败，错误代码：{e.Code}");
             }
@@ -75,7 +75,7 @@ namespace Chapter5
             try {
                 service.DeleteOrder(num);
             }
-            catch(MyExpection e)
+            catch(MyException e)
             {
                 Console.WriteLine($"删除订单失败，错误代码：{e.Code}");
             }
@@ -123,7 +123,7 @@ namespace Chapter5
                     }
                 }
             }
-            catch(MyExpection e)
+            catch(MyException e)
             {
                 Console.WriteLine($"修改订单失败，错误代码：{e.Code}");
             }
@@ -204,7 +204,7 @@ namespace Chapter5
 
                 
             }
-            catch(MyExpection e) {
+            catch(MyException e) {
                 Console.WriteLine($"查找订单失败，错误代码：{e.Code}");
             }
 
