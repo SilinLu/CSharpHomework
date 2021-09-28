@@ -57,8 +57,15 @@ namespace Chapter5
             Console.WriteLine("请输入您的用户名:");
             Customer c = new Customer();
             c.Name = Console.ReadLine();
-            service.AddOrder(order, c);
-            Console.WriteLine($"下订单成功，订单号为{order.Order_Num}");
+            try {
+                service.AddOrder(order, c);
+                Console.WriteLine($"下订单成功，订单号为{order.Order_Num}");
+            }
+            catch (MyExpection e)
+            {
+                Console.WriteLine($"添加订单失败，错误代码：{e.Code}");
+            }
+            
         }
 
         static void Delete()
