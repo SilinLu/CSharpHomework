@@ -12,11 +12,13 @@ namespace Chapter5
         public Goods good { get; set; }
         public int Goods_Num { get; set; }
         public double Sum_Cost {
-            get;set; 
+            get {
+                return good.Unit_Price * Goods_Num;
+            } 
                 }
         public override string ToString()
         {
-            return $"{good.ToString()},quantity of good:{Goods_Num},total cost:{Sum_Cost}\n";
+            return $"{good},quantity of good:{Goods_Num},total cost:{Sum_Cost}\n";
         }
         public override bool Equals(object obj)
         {
@@ -26,7 +28,7 @@ namespace Chapter5
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return HashCode.Combine(good, Goods_Num);
         }
     }
 }

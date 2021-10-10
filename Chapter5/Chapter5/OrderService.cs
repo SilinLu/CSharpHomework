@@ -34,7 +34,7 @@ namespace Chapter5
             OrderDetails details = new OrderDetails();
             details.good = goods[goods_Index];
             details.Goods_Num = quantity;
-            details.Sum_Cost = quantity * details.good.Unit_Price;
+            
             if (order.OrderDetails != null)
             {
                 var query = from o in order.OrderDetails
@@ -48,10 +48,23 @@ namespace Chapter5
             }
             else
                 order.OrderDetails = new List<OrderDetails>();
-            order.SumPrice += details.Sum_Cost;
+            
             order.OrderDetails.Add(details);
 
             return true;
+        }
+
+        public int MaxNum()
+        {
+            int max = 0;
+            var query = from o in orders
+
+                        orderby o.Order_Num descending
+                        select o
+                       ;
+            max = query.First().Order_Num;
+
+            return max;
         }
         public bool AddOrder(Order order,Customer customer)//添加订单
         {
@@ -59,10 +72,11 @@ namespace Chapter5
                 throw new MyException("参数错误", 4);
             order.Customer = customer;
             if (orders.Count() != 0)
-                order.Order_Num = orders.Last().Order_Num++;
+                order.Order_Num = MaxNum()+1;
             else
                 order.Order_Num = 0;
-            
+
+
 
             //if (orders == null)
             //{
@@ -83,7 +97,7 @@ namespace Chapter5
             }
             return false;
         }
-        public void DeleteOrder(uint num) //删除订单
+        public void DeleteOrder(int num) //删除订单
         {
             var order = this.SearchByNum(num);
             
@@ -135,7 +149,7 @@ namespace Chapter5
             return true;
         }
         //-------------------------------------------------------------------
-        public Order SearchByNum(uint num)
+        public Order SearchByNum(int num)
         {
             if (orders == null)
                 throw new MyException("List为空", 3);
@@ -147,25 +161,38 @@ namespace Chapter5
                 throw new MyException("订单号不存在", 1);
             return query.FirstOrDefault();
         }
-        public List<Order> SearchByCost(double price)
+        public List<Order> SearchByLessCost(double price)
         {
             if (orders == null)
                 throw new MyException("List为空", 3);
             var query = from o in orders
-                        where o.SumPrice == price
+                        where o.SumPrice <= price
                         orderby o.SumPrice
                         select o;
-            return query.ToList<Order>();
+            return query.ToList();
         }
+        public List<Order> SearchByMoreCost(double price)
+        {
+            if (orders == null)
+                throw new MyException("List为空", 3);
+            var query = from o in orders
+                        where o.SumPrice >= price
+                        orderby o.SumPrice
+                        select o;
+            return query.ToList();
+        }
+
+
         public List<Order> SearchByCostomer(string name)
         {
             if (orders == null)
+
                 throw new MyException("List为空", 3);
             var query = from o in orders
                         where o.Customer.Name == name
                         orderby o.SumPrice
                         select o;
-            return query.ToList<Order>();
+            return query.ToList();
         }
         public List<Order> SearchByGoodsName(string name)
         {
@@ -180,7 +207,7 @@ namespace Chapter5
 
             //}
             var query = orders.Where( s=>s.OrderDetails.Where(a => a.good.Name == name).Count()!=0);
-            return query.ToList<Order>();
+            return query.ToList();
         }
 
 

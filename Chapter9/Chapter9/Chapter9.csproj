@@ -6,8 +6,4 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Chapter5\Chapter5\Chapter5.csproj" />
-  </ItemGroup>
-
 </Project>

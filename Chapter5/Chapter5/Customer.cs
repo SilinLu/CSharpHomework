@@ -7,6 +7,7 @@ namespace Chapter5
     [Serializable]
     public class Customer
     {
+        
         public string Name { get; set; }
         
         public override string ToString()

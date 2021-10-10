@@ -7,10 +7,22 @@ namespace Chapter5
     [Serializable]
     public class Order
     {
-        public uint Order_Num { get; set; }
+        public int Order_Num { get; set; }
         //public static uint ORDER_NUM=0;
         public List<OrderDetails> OrderDetails;
-        public double SumPrice=0;
+        
+        public double SumPrice
+        {
+            get
+            {
+                double sum=0;
+                foreach(OrderDetails orderDetails in this.OrderDetails)
+                {
+                    sum += orderDetails.Sum_Cost;
+                }
+                return sum;
+            }
+        }
         public Customer Customer { get; set; }
         public override bool Equals(object obj)
         {
@@ -28,9 +40,10 @@ namespace Chapter5
             return arr + $"总金额：{SumPrice}";
             
         }
+
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return HashCode.Combine(Order_Num, OrderDetails, Customer);
         }
     }
 }

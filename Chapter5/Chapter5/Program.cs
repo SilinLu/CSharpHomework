@@ -12,15 +12,11 @@ namespace Chapter5
             {
                 foreach (Order o in service.orders)
                 {
-                    foreach (OrderDetails d in o.OrderDetails)
-                    {
-                        Console.WriteLine(d.ToString());
-                    }
-                    Console.WriteLine($"----------订单号：{o.Order_Num}---用户：{o.Customer.Name}-----------");
+                    Console.WriteLine(o);
                 }
             }
 
-            
+
         }
 
 
@@ -71,7 +67,7 @@ namespace Chapter5
         static void Delete()
         {
             Console.WriteLine("请您输入订单号:");
-            uint num = uint.Parse(Console.ReadLine());
+            int num = int.Parse(Console.ReadLine());
             try {
                 service.DeleteOrder(num);
             }
@@ -88,13 +84,13 @@ namespace Chapter5
 
             try
             {
-                uint num; Order order; string index; int goodIndex = 0;
+                int num; Order order; string index; int goodIndex = 0;
 
                 
                 while (true)
                 {
                     Console.WriteLine("请您输入订单号:");
-                    num = uint.Parse(Console.ReadLine());
+                    num = int.Parse(Console.ReadLine());
                     order = service.SearchByNum(num);
                     Console.WriteLine("请选择您要进行的操作：\n（A：添加货物 D：删除某个订单明细 N：修改订单明细中的货物数量 E:退出修改订单）");
                     index = Console.ReadLine();
@@ -130,7 +126,7 @@ namespace Chapter5
 
 
         }
-
+        
         static void Search()
         {
             try
@@ -143,7 +139,7 @@ namespace Chapter5
                 {
                     case "A":
                         Console.WriteLine("请输入订单号：");
-                        uint num = uint.Parse(Console.ReadLine());
+                        int num = int.Parse(Console.ReadLine());
                         Order o= service.SearchByNum(num);
                         if (o == null)
                         {
@@ -156,7 +152,16 @@ namespace Chapter5
                     case "B":
                         Console.WriteLine("请输入金额：");
                         double cost = double.Parse(Console.ReadLine());
-                        list = service.SearchByCost(cost);
+                        Console.WriteLine("请选择筛选大于或小于该金额的订单 1:> 2:<");
+                        int i = int.Parse(Console.ReadLine());
+                        if (i == 1)
+                            list = service.SearchByLessCost(cost);
+                        else if (i == 2)
+                            list = service.SearchByMoreCost(cost);
+                        else
+                            return;
+
+                        
                         if (list.Count == 0)
                         {
                             Console.WriteLine("没有查询到符合条件的订单");
