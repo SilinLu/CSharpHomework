@@ -84,11 +84,11 @@ namespace chapter8
                     throw new MyException("选中为空", 5);
                 if (appleNum==0&&bananaNum==0&&peachNum==0&&watermelonNum==0&&orangeNum==0)
                     throw new MyException("选中为空", 5);
-                if (checkBoxApple.Checked && appleNum != 0) Program.service.AddOrderDetails(order, appleNum, 0);
-                if (checkBoxbanana.Checked && bananaNum != 0) Program.service.AddOrderDetails(order, bananaNum, 1);
-                if (checkBoxPeach.Checked && peachNum != 0) Program.service.AddOrderDetails(order, peachNum, 2);
-                if (checkBoxWatermelon.Checked && watermelonNum != 0) Program.service.AddOrderDetails(order, watermelonNum, 3);
-                if (checkBoxOrange.Checked && orangeNum != 0) Program.service.AddOrderDetails(order, orangeNum, 4);
+                if (checkBoxApple.Checked && appleNum != 0) Program.service.AddOrderDetail(order, appleNum, 0);
+                if (checkBoxbanana.Checked && bananaNum != 0) Program.service.AddOrderDetail(order, bananaNum, 1);
+                if (checkBoxPeach.Checked && peachNum != 0) Program.service.AddOrderDetail(order, peachNum, 2);
+                if (checkBoxWatermelon.Checked && watermelonNum != 0) Program.service.AddOrderDetail(order, watermelonNum, 3);
+                if (checkBoxOrange.Checked && orangeNum != 0) Program.service.AddOrderDetail(order, orangeNum, 4);
                 Customer customer = new Customer();
                 customer.Name = textBoxCustomer.Text;
                 Program.service.AddOrder(order, customer);

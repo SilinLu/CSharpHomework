@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Chapter5
@@ -7,16 +9,17 @@ namespace Chapter5
     [Serializable]
     public class Order
     {
+        [Key]
         public int Order_Num { get; set; }
         //public static uint ORDER_NUM=0;
-        public List<OrderDetails> OrderDetails;
+        public List<OrderDetail> OrderDetails;
         
         public double SumPrice
         {
             get
             {
                 double sum=0;
-                foreach(OrderDetails orderDetails in this.OrderDetails)
+                foreach(OrderDetail orderDetails in this.OrderDetails)
                 {
                     sum += orderDetails.Sum_Cost;
                 }
@@ -33,7 +36,7 @@ namespace Chapter5
         public override string ToString()
         {
             string arr=$"订单号:{Order_Num},";
-            foreach(OrderDetails d in OrderDetails)
+            foreach(OrderDetail d in OrderDetails)
             {
                 arr += d.ToString();
             }

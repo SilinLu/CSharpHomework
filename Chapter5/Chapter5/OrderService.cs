@@ -27,11 +27,11 @@ namespace Chapter5
             new Goods("watermelon", 2),
             new Goods("orange", 2.5)
         };
-        public bool AddOrderDetails(Order order,int quantity,int goods_Index)//添加订单明细
+        public bool AddOrderDetail(Order order,int quantity,int goods_Index)//添加订单明细
         {
             if (quantity <= 0 || goods_Index < 0 || goods_Index > 4)
                 throw new MyException("参数错误", 4);
-            OrderDetails details = new OrderDetails();
+            OrderDetail details = new OrderDetail();
             details.good = goods[goods_Index];
             details.Goods_Num = quantity;
             
@@ -47,7 +47,7 @@ namespace Chapter5
                        
             }
             else
-                order.OrderDetails = new List<OrderDetails>();
+                order.OrderDetails = new List<OrderDetail>();
             
             order.OrderDetails.Add(details);
 
@@ -113,14 +113,14 @@ namespace Chapter5
         //    order.Customer.Name = name;
         //}
 
-        //public void ChangeAddDetail(Order o, OrderDetails details)          //直接用上面的AddDetail
+        //public void ChangeAddDetail(Order o, OrderDetail details)          //直接用上面的AddDetail
         //{
-        //    var query = from d in o.OrderDetails
+        //    var query = from d in o.OrderDetail
         //                where d.Equals(details)
         //                select d;
         //    if (query.Count() != 0)
         //        throw new MyException("物品重复", 0);
-        //    o.OrderDetails.Add(details);
+        //    o.OrderDetail.Add(details);
 
         //}
         public bool ChangeDeleteDetail(Order order, int goodIndex)//删除某个订单明细
@@ -200,7 +200,7 @@ namespace Chapter5
                 throw new MyException("List为空", 3);
             //foreach (Order o in orders)
             //{
-            //    var query = from d in o.OrderDetails
+            //    var query = from d in o.OrderDetail
             //                where d.good.Name == name
             //                select d;
             //    if(query.Count()!=0)

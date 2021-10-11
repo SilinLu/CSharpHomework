@@ -30,7 +30,7 @@ namespace chapter8
             {
                 int num = int.Parse(textBoxNum.Text);
                 order = Program.service.SearchByNum(num);
-                foreach (OrderDetails orderDetails in order.OrderDetails)
+                foreach (OrderDetail orderDetails in order.OrderDetails)
                 {
                     if (orderDetails.good.Name == "apple") textApple.Text = orderDetails.Goods_Num.ToString();
                     if (orderDetails.good.Name == "peach") textBoxPeach.Text = orderDetails.Goods_Num.ToString();
@@ -77,15 +77,15 @@ namespace chapter8
                 int numOrder=order.Order_Num;
                 order.OrderDetails.Clear();
 
-                if (bananaNum > 0) Program.service.AddOrderDetails(order,bananaNum,1);
+                if (bananaNum > 0) Program.service.AddOrderDetail(order,bananaNum,1);
 
-                if (appleNum > 0) Program.service.AddOrderDetails(order, appleNum, 0);
+                if (appleNum > 0) Program.service.AddOrderDetail(order, appleNum, 0);
 
-                if (peachNum > 0) Program.service.AddOrderDetails(order,  peachNum,2);
+                if (peachNum > 0) Program.service.AddOrderDetail(order,  peachNum,2);
 
-                if (waterNum > 0) Program.service.AddOrderDetails(order, waterNum, 3);
+                if (waterNum > 0) Program.service.AddOrderDetail(order, waterNum, 3);
 
-                if (orangeNum > 0) Program.service.AddOrderDetails(order,  orangeNum, 4);
+                if (orangeNum > 0) Program.service.AddOrderDetail(order,  orangeNum, 4);
 
 
                 labelInfo.Text = "修改成功";

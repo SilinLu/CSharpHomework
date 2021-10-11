@@ -18,7 +18,7 @@ namespace Chapter5.Tests
         {
             Order order = new Order();
             
-            Assert.IsTrue(service.AddOrderDetails(order, 1, 2));
+            Assert.IsTrue(service.AddOrderDetail(order, 1, 2));
         }
         [TestMethod()]
         [ExpectedException(typeof(MyException), "Test Exception")]
@@ -26,7 +26,7 @@ namespace Chapter5.Tests
         {
             Order order = new Order();
 
-            service.AddOrderDetails(order, -1, 2);//数量为负数
+            service.AddOrderDetail(order, -1, 2);//数量为负数
 
 
         }
@@ -36,7 +36,7 @@ namespace Chapter5.Tests
         public void AddOrderDetailsTest3()
         {
             Order order = new Order();
-            service.AddOrderDetails(order, 1, 6);//good index超出范围
+            service.AddOrderDetail(order, 1, 6);//good index超出范围
 
         }
 
@@ -85,8 +85,8 @@ namespace Chapter5.Tests
             o.Order_Num = 0;
             o.Customer = new Customer();
             o.Customer.Name = "cc";
-            o.OrderDetails = new List<OrderDetails>();
-            OrderDetails Details = new OrderDetails();
+            o.OrderDetails = new List<OrderDetail>();
+            OrderDetail Details = new OrderDetail();
             Details.good = service.goods[2];
             Details.Goods_Num = 1;
             o.OrderDetails.Add(Details);
@@ -104,8 +104,8 @@ namespace Chapter5.Tests
             o.Order_Num = 0;
             o.Customer = new Customer();
             o.Customer.Name = "cc";
-            o.OrderDetails = new List<OrderDetails>();
-            OrderDetails Details = new OrderDetails();
+            o.OrderDetails = new List<OrderDetail>();
+            OrderDetail Details = new OrderDetail();
             Details.good = service.goods[1];
             Details.Goods_Num = 1;
             
@@ -123,8 +123,8 @@ namespace Chapter5.Tests
             o.Order_Num = 0;
             o.Customer = new Customer();
             o.Customer.Name = "cc";
-            o.OrderDetails = new List<OrderDetails>();
-            OrderDetails Details = new OrderDetails();
+            o.OrderDetails = new List<OrderDetail>();
+            OrderDetail Details = new OrderDetail();
             Details.good = service.goods[1];
             Details.Goods_Num = 1;
             
@@ -159,8 +159,8 @@ namespace Chapter5.Tests
             o.Order_Num = 0;
             o.Customer = new Customer();
             o.Customer.Name = "cc";
-            o.OrderDetails = new List<OrderDetails>();
-            OrderDetails Details = new OrderDetails();
+            o.OrderDetails = new List<OrderDetail>();
+            OrderDetail Details = new OrderDetail();
             Details.good = service.goods[2];
             Details.Goods_Num = 4;
             
@@ -177,8 +177,8 @@ namespace Chapter5.Tests
             o.Order_Num = 1000;
             o.Customer = new Customer();
             o.Customer.Name = "cc";
-            o.OrderDetails = new List<OrderDetails>();
-            OrderDetails Details = new OrderDetails();
+            o.OrderDetails = new List<OrderDetail>();
+            OrderDetail Details = new OrderDetail();
             Details.good = service.goods[2];
             Details.Goods_Num = 1;
             o.OrderDetails.Add(Details);
@@ -194,8 +194,8 @@ namespace Chapter5.Tests
             o.Order_Num = 0;
             o.Customer = new Customer();
             o.Customer.Name = "cc";
-            o.OrderDetails = new List<OrderDetails>();
-            OrderDetails Details = new OrderDetails();
+            o.OrderDetails = new List<OrderDetail>();
+            OrderDetail Details = new OrderDetail();
             Details.good = service.goods[2];
             Details.Goods_Num = 1;
             o.OrderDetails.Add(Details);
@@ -212,8 +212,8 @@ namespace Chapter5.Tests
             o.Order_Num = 0;
             o.Customer = new Customer();
             o.Customer.Name = "cc";
-            o.OrderDetails = new List<OrderDetails>();
-            OrderDetails Details = new OrderDetails();
+            o.OrderDetails = new List<OrderDetail>();
+            OrderDetail Details = new OrderDetail();
             Details.good = service.goods[2];
             Details.Goods_Num = 1;
             o.OrderDetails.Add(Details);
@@ -230,8 +230,8 @@ namespace Chapter5.Tests
             o.Order_Num = 0;
             o.Customer = new Customer();
             o.Customer.Name = "cc";
-            o.OrderDetails = new List<OrderDetails>();
-            OrderDetails Details = new OrderDetails();
+            o.OrderDetails = new List<OrderDetail>();
+            OrderDetail Details = new OrderDetail();
             Details.good = service.goods[2];
             Details.Goods_Num = 1;
             o.OrderDetails.Add(Details);
@@ -248,8 +248,8 @@ namespace Chapter5.Tests
             o.Order_Num = 0;
             o.Customer = new Customer();
             o.Customer.Name = "cc";
-            o.OrderDetails = new List<OrderDetails>();
-            OrderDetails Details = new OrderDetails();
+            o.OrderDetails = new List<OrderDetail>();
+            OrderDetail Details = new OrderDetail();
             Details.good = service.goods[2];
             Details.Goods_Num = 1;
             o.OrderDetails.Add(Details);
@@ -265,8 +265,8 @@ namespace Chapter5.Tests
             o.Order_Num = 0;
             o.Customer = new Customer();
             o.Customer.Name = "cc";
-            o.OrderDetails = new List<OrderDetails>();
-            OrderDetails Details = new OrderDetails();
+            o.OrderDetails = new List<OrderDetail>();
+            OrderDetail Details = new OrderDetail();
             Details.good = service.goods[2];
             Details.Goods_Num = 1;
             o.OrderDetails.Add(Details);
@@ -283,8 +283,8 @@ namespace Chapter5.Tests
             o.Order_Num = 0;
             o.Customer = new Customer();
             o.Customer.Name = "cc";
-            o.OrderDetails = new List<OrderDetails>();
-            OrderDetails Details = new OrderDetails();
+            o.OrderDetails = new List<OrderDetail>();
+            OrderDetail Details = new OrderDetail();
             Details.good = service.goods[2];
             Details.Goods_Num = 1;
             o.OrderDetails.Add(Details);
@@ -319,8 +319,8 @@ namespace Chapter5.Tests
             o.Order_Num = 0;
             o.Customer = new Customer();
             o.Customer.Name = "cc";
-            o.OrderDetails = new List<OrderDetails>();
-            OrderDetails Details = new OrderDetails();
+            o.OrderDetails = new List<OrderDetail>();
+            OrderDetail Details = new OrderDetail();
             Details.good = service.goods[2];
             Details.Goods_Num = 1;
             o.OrderDetails.Add(Details);
@@ -337,8 +337,8 @@ namespace Chapter5.Tests
             o.Order_Num = 0;
             o.Customer = new Customer();
             o.Customer.Name = "cc";
-            o.OrderDetails = new List<OrderDetails>();
-            OrderDetails Details = new OrderDetails();
+            o.OrderDetails = new List<OrderDetail>();
+            OrderDetail Details = new OrderDetail();
             Details.good = service.goods[2];
             Details.Goods_Num = 4;
 

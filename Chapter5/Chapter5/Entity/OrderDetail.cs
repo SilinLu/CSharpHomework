@@ -7,7 +7,7 @@ namespace Chapter5
 
 
     [Serializable]
-    public class OrderDetails
+    public class OrderDetail
     {
         public Goods good { get; set; }
         public int Goods_Num { get; set; }
@@ -22,7 +22,7 @@ namespace Chapter5
         }
         public override bool Equals(object obj)
         {
-            OrderDetails details = obj as OrderDetails;
+            OrderDetail details = obj as OrderDetail;
             return details != null && good.Name==details.good.Name;
         }
 

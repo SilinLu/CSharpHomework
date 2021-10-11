@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 namespace Chapter5
 {
     class Program
@@ -33,7 +34,7 @@ namespace Chapter5
             try
             {
                 
-                service.AddOrderDetails(order, quantity, num);
+                service.AddOrderDetail(order, quantity, num);
             }
             catch (MyException e)
             {
