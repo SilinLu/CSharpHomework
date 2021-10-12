@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.ModelConfiguration;
 using System.Text;
 
-namespace Chapter5
+namespace Chapter11
 {
     [Serializable]
-
-    [Table("Orders")]
     public class Order
     {
         [Key]
-        public int Order_Num { get; set; }
+        public int OrderId { get; set; }
         //public static uint ORDER_NUM=0;
         public List<OrderDetail> OrderDetails;
         
@@ -32,12 +31,12 @@ namespace Chapter5
         public override bool Equals(object obj)
         {
             Order order = obj as Order;
-            return order != null && order.Order_Num == Order_Num;
+            return order != null && order.OrderId == OrderId;
         }
 
         public override string ToString()
         {
-            string arr=$"订单号:{Order_Num},";
+            string arr=$"订单号:{OrderId},";
             foreach(OrderDetail d in OrderDetails)
             {
                 arr += d.ToString();
@@ -48,7 +47,20 @@ namespace Chapter5
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Order_Num, OrderDetails, Customer);
+            int hashCode = 625995856;
+            hashCode = hashCode * -1521134295 + OrderId.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<OrderDetail>>.Default.GetHashCode(OrderDetails);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Customer>.Default.GetHashCode(Customer);
+            return hashCode;
+        }
+    }
+
+
+    class OrderConfig : EntityTypeConfiguration<Order>
+    {
+        public OrderConfig()
+        {
+            this.ToTable("Order");
         }
     }
 }

@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 
-namespace Chapter5
+namespace Chapter11
 {
 
     public class MyException : Exception
@@ -59,10 +59,10 @@ namespace Chapter5
             int max = 0;
             var query = from o in orders
 
-                        orderby o.Order_Num descending
+                        orderby o.OrderId descending
                         select o
                        ;
-            max = query.First().Order_Num;
+            max = query.First().OrderId;
 
             return max;
         }
@@ -72,9 +72,9 @@ namespace Chapter5
                 throw new MyException("参数错误", 4);
             order.Customer = customer;
             if (orders.Count() != 0)
-                order.Order_Num = MaxNum()+1;
+                order.OrderId = MaxNum()+1;
             else
-                order.Order_Num = 0;
+                order.OrderId = 0;
 
 
 
@@ -154,7 +154,7 @@ namespace Chapter5
             if (orders == null)
                 throw new MyException("List为空", 3);
             var query = from o in orders
-                        where o.Order_Num == num
+                        where o.OrderId == num
                         orderby o.SumPrice
                         select o;
             if (query.FirstOrDefault() == null)

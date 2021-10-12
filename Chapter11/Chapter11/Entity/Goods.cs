@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Chapter5
+namespace Chapter11
 {
     [Serializable]
     public class Goods

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.ModelConfiguration;
 using System.Text;
 
-namespace Chapter5
+namespace Chapter11
 {
 
 
@@ -11,9 +12,9 @@ namespace Chapter5
     [Table("orderDetail")]
     public class OrderDetail
     {
-
+        public int OrderDetailId { get; set; }
         public Order Order { get; set; }
-        public int Order_Num { get; set; }
+        public int OrderId { get; set; }
         public Goods good { get; set; }
         public int Goods_Num { get; set; }
         public double Sum_Cost {//不需要存
@@ -34,7 +35,21 @@ namespace Chapter5
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(good, Goods_Num);
+            int hashCode = -864811469;
+            hashCode = hashCode * -1521134295 + OrderDetailId.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<Order>.Default.GetHashCode(Order);
+            hashCode = hashCode * -1521134295 + OrderId.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<Goods>.Default.GetHashCode(good);
+            hashCode = hashCode * -1521134295 + Goods_Num.GetHashCode();
+            return hashCode;
+        }
+    }
+
+    class OrderDetailConfig : EntityTypeConfiguration<OrderDetail>
+    {
+        public OrderDetailConfig()
+        {
+            this.ToTable("OrderDetails");
         }
     }
 }
