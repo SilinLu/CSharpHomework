@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 
 namespace Chapter5
@@ -33,7 +34,7 @@ namespace Chapter5
             int quantity = int.Parse(Console.ReadLine());
             try
             {
-                
+
                 service.AddOrderDetail(order, quantity, num);
             }
             catch (MyException e)
@@ -54,7 +55,8 @@ namespace Chapter5
             Console.WriteLine("请输入您的用户名:");
             Customer c = new Customer();
             c.Name = Console.ReadLine();
-            try {
+            try
+            {
                 service.AddOrder(order, c);
                 Console.WriteLine($"下订单成功，订单号为{order.Order_Num}");
             }
@@ -62,22 +64,23 @@ namespace Chapter5
             {
                 Console.WriteLine($"添加订单失败，错误代码：{e.Code}");
             }
-            
+
         }
 
         static void Delete()
         {
             Console.WriteLine("请您输入订单号:");
             int num = int.Parse(Console.ReadLine());
-            try {
+            try
+            {
                 service.DeleteOrder(num);
             }
-            catch(MyException e)
+            catch (MyException e)
             {
                 Console.WriteLine($"删除订单失败，错误代码：{e.Code}");
             }
 
-            
+
         }
 
         static void Change()
@@ -87,7 +90,7 @@ namespace Chapter5
             {
                 int num; Order order; string index; int goodIndex = 0;
 
-                
+
                 while (true)
                 {
                     Console.WriteLine("请您输入订单号:");
@@ -98,11 +101,11 @@ namespace Chapter5
                     switch (index)
                     {
                         case "A":
-                             
+
                             AddDetail(order);
                             break;
                         case "D":
-                            
+
                             Console.WriteLine("请输入您需要删除的货物序号：0.苹果 1.香蕉 2.桃子 3.西瓜 4.橙子");
                             goodIndex = int.Parse(Console.ReadLine());
                             service.ChangeDeleteDetail(order, goodIndex);
@@ -120,14 +123,14 @@ namespace Chapter5
                     }
                 }
             }
-            catch(MyException e)
+            catch (MyException e)
             {
                 Console.WriteLine($"修改订单失败，错误代码：{e.Code}");
             }
 
 
         }
-        
+
         static void Search()
         {
             try
@@ -141,7 +144,7 @@ namespace Chapter5
                     case "A":
                         Console.WriteLine("请输入订单号：");
                         int num = int.Parse(Console.ReadLine());
-                        Order o= service.SearchByNum(num);
+                        Order o = service.SearchByNum(num);
                         if (o == null)
                         {
                             Console.WriteLine("没有查询到符合条件的订单");
@@ -162,14 +165,14 @@ namespace Chapter5
                         else
                             return;
 
-                        
+
                         if (list.Count == 0)
                         {
                             Console.WriteLine("没有查询到符合条件的订单");
                             return;
                         }
                         Console.WriteLine($"结果如下：");
-                        foreach(Order order in list)
+                        foreach (Order order in list)
                         {
                             Console.WriteLine(order.ToString());
                         }
@@ -204,19 +207,23 @@ namespace Chapter5
                             Console.WriteLine(order.ToString());
                         }
                         break;
-                        
+
                     default: break;
                 }
 
-                
+
             }
-            catch(MyException e) {
+            catch (MyException e)
+            {
                 Console.WriteLine($"查找订单失败，错误代码：{e.Code}");
             }
 
         }
         static void Main(string[] args)
         {
+
+
+
             string index;
             service.Import();
 
@@ -224,7 +231,7 @@ namespace Chapter5
             {
                 PrintOrder();
                 Console.WriteLine("请选择您要进行的操作：\n（A：添加订单 D：删除订单 C:修改订单 S：查询订单）");
-                index= Console.ReadLine();
+                index = Console.ReadLine();
                 switch (index)
                 {
                     case "A":
@@ -242,7 +249,7 @@ namespace Chapter5
                     case "S":
                         Search();
                         break;
-                    default:break;
+                    default: break;
                 }
 
             }
