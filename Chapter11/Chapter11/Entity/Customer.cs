@@ -10,11 +10,7 @@ namespace Chapter11
         
         public string Name { get; set; }
 
-        public override bool Equals(object obj)
-        {
-            return obj is Customer customer &&
-                   Name == customer.Name;
-        }
+
 
         public override string ToString()
         {
