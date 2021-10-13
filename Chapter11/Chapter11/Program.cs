@@ -23,7 +23,7 @@ namespace Chapter11
                 ctx.SaveChanges();
 
                 OrderDetail orderDetail = new OrderDetail();
-                orderDetail.good = new Goods() { Name = "APPLE", Unit_Price = 5 };
+                orderDetail.good = new Good() { Name = "APPLE", Unit_Price = 5 };
                 orderDetail.Goods_Num = 1;
                 orderDetail.OrderId = order.OrderId;
                 orderDetail.Order = order;

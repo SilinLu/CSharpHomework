@@ -20,12 +20,12 @@ namespace Chapter11
     public class OrderService
     {
         public List<Order> orders = new List<Order>();
-        public List<Goods> goods = new List<Goods>{ 
-            new Goods("apple", 5), 
-            new Goods("banana", 3), 
-            new Goods("peach", 3.5),
-            new Goods("watermelon", 2),
-            new Goods("orange", 2.5)
+        public List<Good> goods = new List<Good>{ 
+            new Good("apple", 5), 
+            new Good("banana", 3), 
+            new Good("peach", 3.5),
+            new Good("watermelon", 2),
+            new Good("orange", 2.5)
         };
         public bool AddOrderDetail(Order order,int quantity,int goods_Index)//添加订单明细
         {

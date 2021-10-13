@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Chapter11
+namespace Chapter12
 {
     [Serializable]
-    public class Goods
+    public class Good
     {
+        public int GoodId { get; set; }
         public string Name { get; set; }
         public double Unit_Price { get; set; }
-        public Goods(string name,double price)
+        public Good(string name,double price)
         {
             Name = name;
             Unit_Price = price;
         }
-        public Goods() { }
+        public Good() { }
         public override string ToString()
         {
-            return $"Goods:{Name},Unit price:{Unit_Price}";
+            return $"Good:{Name},Unit price:{Unit_Price}";
         }
     }
 }

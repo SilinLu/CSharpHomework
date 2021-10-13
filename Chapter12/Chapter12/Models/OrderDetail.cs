@@ -1,25 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
-using System.Text;
 
-namespace Chapter11
+namespace Chapter12
 {
 
 
     [Serializable]
-    [Table("orderDetail")]
+    [Table("orderDetails")]
     public class OrderDetail
     {
         public int OrderDetailId { get; set; }
         public Order Order { get; set; }
         public int OrderId { get; set; }
+        [ForeignKey("good_GoodId")]
         public Good good { get; set; }
         public int Goods_Num { get; set; }
         public double Sum_Cost {//不需要存
             get {
-                return good.Unit_Price * Goods_Num;
+                return good != null ? good.Unit_Price * Goods_Num:0 ;
             }
             
                 }
@@ -45,11 +44,5 @@ namespace Chapter11
         }
     }
 
-    class OrderDetailConfig : EntityTypeConfiguration<OrderDetail>
-    {
-        public OrderDetailConfig()
-        {
-            this.ToTable("OrderDetails");
-        }
-    }
+
 }

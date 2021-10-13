@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
-using System.Text;
 
-namespace Chapter11
+namespace Chapter12
 {
     [Serializable]
     public class Order
@@ -14,12 +12,18 @@ namespace Chapter11
         public int OrderId { get; set; }
         //public static uint ORDER_NUM=0;
         public List<OrderDetail> OrderDetails;
+        [ForeignKey("Customer_CustomerId")]
+        public Customer Customer { get; set; }
 
         public double SumPrice
         {
             get
             {
                 double sum=0;
+                if (OrderDetails==null)
+                {
+                    return 0;
+                }
                 foreach(OrderDetail orderDetails in OrderDetails)
                 {
                     sum += orderDetails.Sum_Cost;
@@ -27,11 +31,7 @@ namespace Chapter11
                 return sum;
             }
         }
-        //[ForeignKey("CustomerId")]
-        //public int CustomerId { get; set; }
-        [ForeignKey("CustomerId")]
-        public int Customer_CustomerId { get; set; }
-        public Customer Customer { get; set; }
+
         public override bool Equals(object obj)
         {
             Order order = obj as Order;
@@ -60,11 +60,5 @@ namespace Chapter11
     }
 
 
-    class OrderConfig : EntityTypeConfiguration<Order>
-    {
-        public OrderConfig()
-        {
-            this.ToTable("Orders");
-        }
-    }
+
 }

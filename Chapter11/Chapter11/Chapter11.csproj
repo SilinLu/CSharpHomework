@@ -105,7 +105,7 @@
   <ItemGroup>
     <Compile Include="DBConnection\OrderContext.cs" />
     <Compile Include="Entity\Customer.cs" />
-    <Compile Include="Entity\Goods.cs" />
+    <Compile Include="Entity\Good.cs" />
     <Compile Include="Entity\Order.cs" />
     <Compile Include="Entity\OrderDetail.cs" />
     <Compile Include="OrderService.cs" />
